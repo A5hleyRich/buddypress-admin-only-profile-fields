@@ -17,17 +17,18 @@ Easily set the visibility of BuddyPress profile fields to hidden, allowing only 
 == Installation ==
 
 1. Upload `bp-admin-only-profile-fields` to the `/wp-content/plugins/` directory.
-1. Activate the plugin through the 'Plugins' menu in WordPress.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= How do I change who can view and edit the hidden field? =
 
-An answer to that question.
+Add the following filter to your theme’s functions.php file, substituting *manage_options* with the desired capability:
+`add_filter( 'bp_admin_only_profile_fields_cap', 'edit_others_posts' ); // Editors`
 
 == Screenshots ==
 
-
+1. Edit field BuddyPress screen.
 
 == Changelog ==
 
