@@ -113,7 +113,7 @@ class BP_Admin_Only_Profile_Fields {
      */
     public function custom_visibility_levels($levels) {
 
-    	$levels[] = array(
+    	$levels['hidden'] = array(
 			'id' 	=> 'hidden',
 			'label' => __( 'Hidden', 'bp_admin_only_profile_fields' )
 		);
