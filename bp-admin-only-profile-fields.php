@@ -102,7 +102,6 @@ class BP_Admin_Only_Profile_Fields {
      */
     private function load_plugin_textdomain() {
 
-		load_textdomain( 'bp_admin_only_profile_fields', WP_LANG_DIR . '/bp_admin_only_profile_fields/bp_admin_only_profile_fields-' . get_locale() . '.mo' );
         load_plugin_textdomain( 'bp_admin_only_profile_fields', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
     }
 
