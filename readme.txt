@@ -36,7 +36,7 @@ Add the following filter to your theme’s functions.php file, substituting *man
 
 == Screenshots ==
 
-
+1. Edit field BuddyPress screen.
 
 == Changelog ==
 
