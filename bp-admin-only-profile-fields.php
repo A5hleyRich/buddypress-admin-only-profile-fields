@@ -147,13 +147,13 @@ class BP_Admin_Only_Profile_Fields {
      */
     public function hide_hidden_fields($hidden_fields, $displayed_user_id, $current_user_id) {
 
-    	$hidden_fields = bp_xprofile_get_fields_by_visibility_levels( $displayed_user_id, ['hidden'] );
+    	$hidden_fields = bp_xprofile_get_fields_by_visibility_levels( $displayed_user_id, array( 'hidden' ) );
 
 		if ( !current_user_can( apply_filters( 'bp_admin_only_profile_fields_cap', 'manage_options' ) ) ) {
 			return $hidden_fields;
 		}
 
-		return [];
+		return array();
     }
 
 }
