@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: buddypress, admin, hidden, profile, field, visibility
 Requires at least: 4.1.1
 Tested up to: 4.1.1
-Stable tag: 1.1
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,11 @@ add_filter( 'bp_admin_only_profile_fields_cap', 'custom_profile_fields_visibilit
 
 == Changelog ==
 
+= 1.1.1 =
+
+* Fix fatal error on activation
+* Adhere to WordPress coding standards
+
 = 1.1 =
 
 * Hide the _Per-Member Visibility_ options when the _Default Visibility_ is set to _Hidden_
@@ -54,6 +59,10 @@ add_filter( 'bp_admin_only_profile_fields_cap', 'custom_profile_fields_visibilit
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+
+* Bug fixes
 
 = 1.1 =
 

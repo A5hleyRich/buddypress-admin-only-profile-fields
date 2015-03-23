@@ -2,7 +2,7 @@
 /*
 Plugin Name: BuddyPress Admin Only Profile Fields
 Description: Easily set the visibility of BuddyPress profile fields to hidden, allowing only admin users to edit and view them.
-Version: 1.1
+Version: 1.1.1
 Author: Ashley Rich
 Author URI: http://ashleyrich.com
 License: GPL2
@@ -89,7 +89,7 @@ class BP_Admin_Only_Profile_Fields {
 	private function setup_constants() {
 
 		if ( ! defined( 'BPAOPF_VERSION' ) ) {
-			define( 'BPAOPF_VERSION', '1.1' );
+			define( 'BPAOPF_VERSION', '1.1.1' );
 		}
 
 		if ( ! defined( 'BPAOPF_PLUGIN_URL' ) ) {
