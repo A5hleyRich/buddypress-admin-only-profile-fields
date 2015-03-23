@@ -24,14 +24,16 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 // Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * BuddyPress Admin Only Profile Fields
  *
  * @package  BuddyPress Admin Only Profile Fields
  * @since    1.0
-*/
+ */
 class BP_Admin_Only_Profile_Fields {
 
 	/**
@@ -66,15 +68,17 @@ class BP_Admin_Only_Profile_Fields {
 	 * Return an instance of this class.
 	 *
 	 * @since  1.0
+	 *
+	 * @return BP_Admin_Only_Profile_Fields
 	 */
 	public static function get_instance() {
 
-			// If the single instance hasn't been set, set it now.
-			if ( null == self::$instance ) {
-				self::$instance = new self;
-			}
+		// If the single instance hasn't been set, set it now.
+		if ( null == self::$instance ) {
+			self::$instance = new self;
+		}
 
-			return self::$instance;
+		return self::$instance;
 	}
 
 	/**
@@ -84,28 +88,28 @@ class BP_Admin_Only_Profile_Fields {
 	 */
 	private function setup_constants() {
 
-		if( !defined( 'BPAOPF_VERSION' ) ) {
+		if ( ! defined( 'BPAOPF_VERSION' ) ) {
 			define( 'BPAOPF_VERSION', '1.1' );
 		}
 
-		if( !defined( 'BPAOPF_PLUGIN_URL' ) ) {
+		if ( ! defined( 'BPAOPF_PLUGIN_URL' ) ) {
 			define( 'BPAOPF_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 		}
 
-		if( !defined( 'BPAOPF_PLUGIN_DIR' ) ) {
-			define( 'BPAOPF_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );			
+		if ( ! defined( 'BPAOPF_PLUGIN_DIR' ) ) {
+			define( 'BPAOPF_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 		}
 	}
 
 	/**
-     * Load the plugin text domain.
-     *
-     * @since  1.0
-     */
-    private function load_plugin_textdomain() {
+	 * Load the plugin text domain.
+	 *
+	 * @since  1.0
+	 */
+	private function load_plugin_textdomain() {
 
-        load_plugin_textdomain( 'bp_admin_only_profile_fields', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-    }
+		load_plugin_textdomain( 'bp_admin_only_profile_fields', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	}
 
 	/**
 	 * Enqueue admin scripts.
@@ -125,36 +129,46 @@ class BP_Admin_Only_Profile_Fields {
 		}
 	}
 
-    /**
-     * Add our hidden visibility level.
-     *
-     * @since  1.0
-     */
-    public function custom_visibility_levels($levels) {
+	/**
+	 * Add our hidden visibility level.
+	 *
+	 * @since  1.0
+	 *
+	 * @param array $levels
+	 *
+	 * @return array
+	 */
+	public function custom_visibility_levels( $levels ) {
 
-    	$levels['hidden'] = array(
-			'id' 	=> 'hidden',
+		$levels['hidden'] = array(
+			'id'    => 'hidden',
 			'label' => __( 'Hidden', 'bp_admin_only_profile_fields' )
 		);
 
 		return $levels;
-    }
+	}
 
-    /**
-     * Hide our hidden fields.
-     *
-     * @since  1.0
-     */
-    public function hide_hidden_fields($hidden_fields, $displayed_user_id, $current_user_id) {
+	/**
+	 * Hide our hidden fields.
+	 *
+	 * @since  1.0
+	 *
+	 * @param array $hidden_fields
+	 * @param int   $displayed_user_id
+	 * @param int   $current_user_id
+	 *
+	 * @return array
+	 */
+	public function hide_hidden_fields( $hidden_fields, $displayed_user_id, $current_user_id ) {
 
-    	$hidden_fields = bp_xprofile_get_fields_by_visibility_levels( $displayed_user_id, array( 'hidden' ) );
+		$hidden_fields = bp_xprofile_get_fields_by_visibility_levels( $displayed_user_id, array( 'hidden' ) );
 
-		if ( !current_user_can( apply_filters( 'bp_admin_only_profile_fields_cap', 'manage_options' ) ) ) {
+		if ( ! current_user_can( apply_filters( 'bp_admin_only_profile_fields_cap', 'manage_options' ) ) ) {
 			return $hidden_fields;
 		}
 
 		return array();
-    }
+	}
 
 }
 
