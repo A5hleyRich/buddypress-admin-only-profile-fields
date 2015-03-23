@@ -42,7 +42,7 @@ Add the following filter to your theme’s functions.php file, substituting *man
 
 == Changelog ==
 
-= 1.0.1 =
+= 1.1 =
 
 * Hide the _Per-Member Visibility_ options when the _Default Visibility_ is set to _Hidden_
 
@@ -52,7 +52,7 @@ Add the following filter to your theme’s functions.php file, substituting *man
 
 == Upgrade Notice ==
 
-= 1.0.1 =
+= 1.1 =
 
 * General improvements
 
