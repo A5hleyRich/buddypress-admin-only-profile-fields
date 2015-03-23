@@ -2,8 +2,8 @@
 Contributors: A5hleyRich
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=S6KBW2ZSVZ8RE
 Tags: buddypress, admin, hidden, profile, field, visibility
-Requires at least: 4.1
-Tested up to: 4.1
+Requires at least: 4.1.1
+Tested up to: 4.1.1
 Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -42,12 +42,20 @@ Add the following filter to your theme’s functions.php file, substituting *man
 
 == Changelog ==
 
+= 1.0.1 =
+
+* Hide the _Per-Member Visibility_ options when the _Default Visibility_ is set to _Hidden_
+
 = 1.0 =
 
-* Initial release.
+* Initial release
 
 == Upgrade Notice ==
 
+= 1.0.1 =
+
+* General improvements
+
 = 1.0 =
 
-* Initial release.
+* Initial release
