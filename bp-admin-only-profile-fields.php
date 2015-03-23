@@ -2,7 +2,7 @@
 /*
 Plugin Name: BuddyPress Admin Only Profile Fields
 Description: Easily set the visibility of BuddyPress profile fields to hidden, allowing only admin users to edit and view them.
-Version: 1.0
+Version: 1.1
 Author: Ashley Rich
 Author URI: http://ashleyrich.com
 License: GPL2
@@ -54,6 +54,9 @@ class BP_Admin_Only_Profile_Fields {
 		// Load plugin text domain
 		self::load_plugin_textdomain();
 
+		// Actions
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+
 		// Filters
 		add_filter( 'bp_xprofile_get_visibility_levels', array( $this, 'custom_visibility_levels' ) );
 		add_filter( 'bp_xprofile_get_hidden_fields_for_user', array( $this, 'hide_hidden_fields' ), 10, 3 );
@@ -82,7 +85,7 @@ class BP_Admin_Only_Profile_Fields {
 	private function setup_constants() {
 
 		if( !defined( 'BPAOPF_VERSION' ) ) {
-			define( 'BPAOPF_VERSION', '1.0' );
+			define( 'BPAOPF_VERSION', '1.1' );
 		}
 
 		if( !defined( 'BPAOPF_PLUGIN_URL' ) ) {
@@ -103,6 +106,24 @@ class BP_Admin_Only_Profile_Fields {
 
         load_plugin_textdomain( 'bp_admin_only_profile_fields', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
     }
+
+	/**
+	 * Enqueue admin scripts.
+	 *
+	 * @since  1.1
+	 */
+	public function enqueue_scripts() {
+
+		$min     = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		$src     = plugins_url( 'js/script' . $min . '.js', __FILE__ );
+		$version = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? time() : BPAOPF_VERSION;
+
+		wp_register_script( 'bp_admin_only_profile_fields', $src, array( 'jquery' ), $version, true );
+
+		if ( ! empty( $_GET['page'] ) && false !== strpos( $_GET['page'], 'bp-profile-setup' ) ) {
+			wp_enqueue_script( 'bp_admin_only_profile_fields' );
+		}
+	}
 
     /**
      * Add our hidden visibility level.

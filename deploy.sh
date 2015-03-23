@@ -4,6 +4,9 @@
 # A modification of Dean Clatworthy's deploy script as found here: https://github.com/deanc/wordpress-plugin-git-svn
 # The difference is that this script lives in the plugin's git repo & doesn't require an existing SVN repo.
 
+# grunt
+grunt
+
 # main config
 PLUGINSLUG="buddypress-admin-only-profile-fields" # returns basename of current directory
 CURRENTDIR=`pwd`
@@ -56,9 +59,11 @@ git checkout-index -a -f --prefix=$SVNPATH/trunk/
 
 echo "Ignoring github specific files and deployment script"
 svn propset svn:ignore "deploy.sh
-README.md
 .git
-.gitignore" "$SVNPATH/trunk/"
+.gitignore
+node_modules
+package.json
+Gruntfile.js" "$SVNPATH/trunk/"
 
 echo "Changing directory to SVN and committing to trunk"
 cd $SVNPATH/trunk/
