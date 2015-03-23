@@ -33,8 +33,11 @@ The profile field is now hidden from all users except Administrators.
 
 = How do I change who can view and edit the hidden field? =
 
-Add the following filter to your theme’s functions.php file, substituting *manage_options* with the desired capability:
-`add_filter( 'bp_admin_only_profile_fields_cap', 'edit_others_posts' ); // Editors`
+Add the following filter to your theme’s functions.php file, substituting *edit_others_posts* with the desired capability:
+`function custom_profile_fields_visibility() {
+	return 'edit_others_posts'; // Editors
+}
+add_filter( 'bp_admin_only_profile_fields_cap', 'custom_profile_fields_visibility' );`
 
 == Screenshots ==
 
