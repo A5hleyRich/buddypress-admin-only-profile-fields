@@ -1,10 +1,10 @@
 === BuddyPress Admin Only Profile Fields ===
-Contributors: A5hleyRich
+Contributors: A5hleyRich, garrett-eclipse
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=S6KBW2ZSVZ8RE
 Tags: buddypress, admin, hidden, profile, field, visibility
 Requires at least: 4.1.1
 Tested up to: 4.1.1
-Stable tag: 1.1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,10 @@ add_filter( 'bp_admin_only_profile_fields_cap', 'custom_profile_fields_visibilit
 1. Edit field BuddyPress screen.
 
 == Changelog ==
+
+= 1.1.1 =
+
+* Fix issue breaking standard Buddypress Visibility options
 
 = 1.1.1 =
 

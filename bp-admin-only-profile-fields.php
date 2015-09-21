@@ -2,15 +2,16 @@
 /*
 Plugin Name: BuddyPress Admin Only Profile Fields
 Description: Easily set the visibility of BuddyPress profile fields to hidden, allowing only admin users to edit and view them.
-Version: 1.1.1
+Version: 1.2
 Author: Ashley Rich
+Contributors: Garrett Hyder
 Author URI: http://ashleyrich.com
 License: GPL2
 
 Copyright 2013  Ashley Rich (email : hello@ashleyrich.com)
 
 This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as 
+it under the terms of the GNU General Public License, version 2, as
 published by the Free Software Foundation.
 
 This program is distributed in the hope that it will be useful,
@@ -61,7 +62,7 @@ class BP_Admin_Only_Profile_Fields {
 
 		// Filters
 		add_filter( 'bp_xprofile_get_visibility_levels', array( $this, 'custom_visibility_levels' ) );
-		add_filter( 'bp_xprofile_get_hidden_fields_for_user', array( $this, 'hide_hidden_fields' ), 10, 3 );
+		add_filter ( 'bp_xprofile_get_hidden_field_types_for_user', array( $this, 'append_hidden_level' ), 10, 3 );
 	}
 
 	/**
@@ -149,25 +150,23 @@ class BP_Admin_Only_Profile_Fields {
 	}
 
 	/**
-	 * Hide our hidden fields.
+	 * Append 'hidden' to the visibility levels for this user pair.
 	 *
-	 * @since  1.0
+	 * @since  1.2
 	 *
-	 * @param array $hidden_fields
+	 * @param array $hidden_levels
 	 * @param int   $displayed_user_id
 	 * @param int   $current_user_id
 	 *
 	 * @return array
 	 */
-	public function hide_hidden_fields( $hidden_fields, $displayed_user_id, $current_user_id ) {
-
-		$hidden_fields = bp_xprofile_get_fields_by_visibility_levels( $displayed_user_id, array( 'hidden' ) );
+	public function append_hidden_level( $hidden_levels, $displayed_user_id, $current_user_id ) {
 
 		if ( ! current_user_can( apply_filters( 'bp_admin_only_profile_fields_cap', 'manage_options' ) ) ) {
-			return $hidden_fields;
+			$hidden_levels[] = 'hidden';
 		}
 
-		return array();
+		return $hidden_levels;
 	}
 
 }
