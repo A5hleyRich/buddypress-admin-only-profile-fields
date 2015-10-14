@@ -50,7 +50,6 @@ class BP_Admin_Only_Profile_Fields {
 	 * @since  1.0
 	 */
 	private function __construct() {
-
 		// Setup plugin constants
 		self::setup_constants();
 
@@ -74,7 +73,6 @@ class BP_Admin_Only_Profile_Fields {
 	 * @return BP_Admin_Only_Profile_Fields
 	 */
 	public static function get_instance() {
-
 		// If the single instance hasn't been set, set it now.
 		if ( null == self::$instance ) {
 			self::$instance = new self;
@@ -89,7 +87,6 @@ class BP_Admin_Only_Profile_Fields {
 	 * @since  1.0
 	 */
 	private function setup_constants() {
-
 		if ( ! defined( 'BPAOPF_VERSION' ) ) {
 			define( 'BPAOPF_VERSION', '1.2' );
 		}
@@ -109,7 +106,6 @@ class BP_Admin_Only_Profile_Fields {
 	 * @since  1.0
 	 */
 	private function load_plugin_textdomain() {
-
 		load_plugin_textdomain( 'bp_admin_only_profile_fields', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
@@ -119,7 +115,6 @@ class BP_Admin_Only_Profile_Fields {
 	 * @since  1.1
 	 */
 	public function enqueue_scripts() {
-
 		$min     = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		$src     = plugins_url( 'js/script' . $min . '.js', __FILE__ );
 		$version = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? time() : BPAOPF_VERSION;
@@ -169,39 +164,25 @@ class BP_Admin_Only_Profile_Fields {
 	 * @return array
 	 */
 	public function append_hidden_level( $hidden_levels, $displayed_user_id, $current_user_id ) {
-
 		if ( ! current_user_can( apply_filters( 'bp_admin_only_profile_fields_cap', 'manage_options' ) ) ) {
-
 			// Current user is non-admin
 			$hidden_levels[] = 'hidden';
 
 			if ( empty( $current_user_id ) ) {
-
 				// Current user is not logged in
 				$hidden_levels[] = 'admin-owner';
-
 			} else {
-
 				if ( $displayed_user_id != $current_user_id ) {
-
 					// Not viewing own profile
 					$hidden_levels[] = 'admin-owner';
-
 				} else {
-
 					if ( bp_is_user_profile_edit() ) {
-
 						// Editing profile
 						$hidden_levels[] = 'admin-owner';
 						$hidden_levels[] = 'admin-all';
-
 					}
-
 				}
-
 			}
-
-
 		}
 
 		return $hidden_levels;
@@ -213,44 +194,39 @@ class BP_Admin_Only_Profile_Fields {
 	 * @since  1.2
 	 *
 	 * @param string $retval
-	 * @param array   $request
+	 * @param array   $r
 	 * @param array   $args
 	 *
 	 * @return array
 	 */
 	public function filter_hidden_visibility_from_radio_buttons( $retval, $r, $args ) {
-
 		// Empty return value, filled in below if a valid field ID is found
 		$retval = '';
 
 		// Only do-the-do if there's a valid field ID
-		if ( ! empty( $r['field_id'] ) ) :
-
+		if ( ! empty( $r['field_id'] ) ) {
 			// Start the output buffer
 			ob_start();
 
 			// Output anything before
 			echo $r['before']; ?>
 
-			<?php if ( bp_current_user_can( 'bp_xprofile_change_field_visibility' ) ) : ?>
+			<?php if (bp_current_user_can('bp_xprofile_change_field_visibility')) : ?>
+				<?php foreach (bp_xprofile_get_visibility_levels() as $level) : ?>
+					<?php if (!in_array($level['id'], array('hidden', 'admin-owner', 'admin-all'))) : ?>
+						<?php printf($r['before_radio'], esc_attr($level['id'])); ?>
 
-				<?php foreach( bp_xprofile_get_visibility_levels() as $level ) : ?>
-
-					<?php if ( ! in_array( $level['id'], array( 'hidden', 'admin-owner', 'admin-all' ) ) ) : ?>
-
-						<?php printf( $r['before_radio'], esc_attr( $level['id'] ) ); ?>
-
-						<label for="<?php echo esc_attr( 'see-field_' . $r['field_id'] . '_' . $level['id'] ); ?>">
-							<input type="radio" id="<?php echo esc_attr( 'see-field_' . $r['field_id'] . '_' . $level['id'] ); ?>" name="<?php echo esc_attr( 'field_' . $r['field_id'] . '_visibility' ); ?>" value="<?php echo esc_attr( $level['id'] ); ?>" <?php checked( $level['id'], bp_get_the_profile_field_visibility_level() ); ?> />
-							<span class="field-visibility-text"><?php echo esc_html( $level['label'] ); ?></span>
+						<label for="<?php echo esc_attr('see-field_' . $r['field_id'] . '_' . $level['id']); ?>">
+							<input type="radio"
+								   id="<?php echo esc_attr('see-field_' . $r['field_id'] . '_' . $level['id']); ?>"
+								   name="<?php echo esc_attr('field_' . $r['field_id'] . '_visibility'); ?>"
+								   value="<?php echo esc_attr($level['id']); ?>" <?php checked($level['id'], bp_get_the_profile_field_visibility_level()); ?> />
+							<span class="field-visibility-text"><?php echo esc_html($level['label']); ?></span>
 						</label>
 
 						<?php echo $r['after_radio']; ?>
-
 					<?php endif; ?>
-
 				<?php endforeach; ?>
-
 			<?php endif;
 
 			// Output anything after
@@ -258,12 +234,10 @@ class BP_Admin_Only_Profile_Fields {
 
 			// Get the output buffer and empty it
 			$retval = ob_get_clean();
-
-		endif;
+		}
 
 		return $retval;
 	}
-
 }
 
 $bp_admin_only_profile_fields = BP_Admin_Only_Profile_Fields::get_instance();
