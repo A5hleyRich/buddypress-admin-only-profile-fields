@@ -141,20 +141,18 @@ class BP_Admin_Only_Profile_Fields {
 	 * @return array
 	 */
 	public function custom_visibility_levels( $levels ) {
-
 		$levels['hidden'] = array(
 			'id'    => 'hidden',
-			'label' => __( 'Hidden', 'bp_admin_only_profile_fields' )
+			'label' => __( 'Admin Only', 'bp_admin_only_profile_fields' )
 		);
-		$levels['internal'] = array(
-			'id'    => 'internal',
-			'label' => __( 'Admin Internal', 'bp_admin_only_profile_fields' )
+		$levels['admin-owner'] = array(
+			'id'    => 'admin-owner',
+			'label' => __( 'Admin and Profile Owner', 'bp_admin_only_profile_fields' )
 		);
-		$levels['adminedit'] = array(
-			'id'    => 'adminedit',
-			'label' => __( 'Admin Editable', 'bp_admin_only_profile_fields' )
+		$levels['admin-all'] = array(
+			'id'    => 'admin-all',
+			'label' => __( 'Admin and All Users', 'bp_admin_only_profile_fields' )
 		);
-
 
 		return $levels;
 	}
@@ -180,22 +178,22 @@ class BP_Admin_Only_Profile_Fields {
 			if ( empty( $current_user_id ) ) {
 
 				// Current user is not logged in
-				$hidden_levels[] = 'internal';
+				$hidden_levels[] = 'admin-owner';
 
 			} else {
 
 				if ( $displayed_user_id != $current_user_id ) {
 
 					// Not viewing own profile
-					$hidden_levels[] = 'internal';
+					$hidden_levels[] = 'admin-owner';
 
 				} else {
 
 					if ( bp_is_profile_edit() ) {
 
 						// Editing profile
-						$hidden_levels[] = 'internal';
-						$hidden_levels[] = 'adminedit';
+						$hidden_levels[] = 'admin-owner';
+						$hidden_levels[] = 'admin-all';
 
 					}
 
@@ -238,7 +236,7 @@ class BP_Admin_Only_Profile_Fields {
 
 				<?php foreach( bp_xprofile_get_visibility_levels() as $level ) : ?>
 
-					<?php if ( ! in_array( $level['id'], array( 'hidden', 'internal', 'adminedit' ) ) ) : ?>
+					<?php if ( ! in_array( $level['id'], array( 'hidden', 'admin-owner', 'admin-all' ) ) ) : ?>
 
 						<?php printf( $r['before_radio'], esc_attr( $level['id'] ) ); ?>
 

@@ -5,7 +5,7 @@
 		var $visibilityInput = $( 'select[name=default-visibility]' );
 		var $allowedInput    = $( '#allow-custom-visibility-allowed' )
 		var $disabledInput   = $( '#allow-custom-visibility-disabled' );
-		var $adminVisibilities = ['hidden', 'internal', 'adminedit'];
+		var $adminVisibilities = ['hidden', 'admin-owner', 'admin-all'];
 
 		if ( $.inArray( $visibilityInput.val(), $adminVisibilities ) !== -1 ) {
 			$disabledInput.attr( 'checked', true );
