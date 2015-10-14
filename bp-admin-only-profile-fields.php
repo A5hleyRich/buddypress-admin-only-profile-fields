@@ -142,11 +142,11 @@ class BP_Admin_Only_Profile_Fields {
 		);
 		$levels['admin-owner'] = array(
 			'id'    => 'admin-owner',
-			'label' => __( 'Admin and Profile Owner', 'bp_admin_only_profile_fields' )
+			'label' => __( 'Admin & Profile Owner', 'bp_admin_only_profile_fields' )
 		);
 		$levels['admin-all'] = array(
 			'id'    => 'admin-all',
-			'label' => __( 'Admin and All Users', 'bp_admin_only_profile_fields' )
+			'label' => __( 'Admin & All Users', 'bp_admin_only_profile_fields' )
 		);
 
 		return $levels;
