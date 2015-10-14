@@ -189,7 +189,7 @@ class BP_Admin_Only_Profile_Fields {
 
 				} else {
 
-					if ( bp_is_profile_edit() ) {
+					if ( bp_is_user_profile_edit() ) {
 
 						// Editing profile
 						$hidden_levels[] = 'admin-owner';
