@@ -172,7 +172,7 @@ class BP_Admin_Only_Profile_Fields {
 				// Current user is not logged in
 				$hidden_levels[] = 'admin-owner';
 			} else {
-				if ( $displayed_user_id != $current_user_id ) {
+				if ( $displayed_user_id !== $current_user_id ) {
 					// Not viewing own profile
 					$hidden_levels[] = 'admin-owner';
 				} else {
@@ -211,17 +211,17 @@ class BP_Admin_Only_Profile_Fields {
 			// Output anything before
 			echo $r['before']; ?>
 
-			<?php if (bp_current_user_can('bp_xprofile_change_field_visibility')) : ?>
-				<?php foreach (bp_xprofile_get_visibility_levels() as $level) : ?>
-					<?php if (!in_array($level['id'], array('hidden', 'admin-owner', 'admin-all'))) : ?>
-						<?php printf($r['before_radio'], esc_attr($level['id'])); ?>
+			<?php if ( bp_current_user_can( 'bp_xprofile_change_field_visibility' ) ) : ?>
+				<?php foreach ( bp_xprofile_get_visibility_levels() as $level ) : ?>
+					<?php if ( ! in_array( $level['id'], array( 'hidden', 'admin-owner', 'admin-all' ) ) ) : ?>
+						<?php printf( $r['before_radio'], esc_attr( $level['id'] ) ); ?>
 
-						<label for="<?php echo esc_attr('see-field_' . $r['field_id'] . '_' . $level['id']); ?>">
+						<label for="<?php echo esc_attr( 'see-field_' . $r['field_id'] . '_' . $level['id'] ); ?>">
 							<input type="radio"
-								   id="<?php echo esc_attr('see-field_' . $r['field_id'] . '_' . $level['id']); ?>"
-								   name="<?php echo esc_attr('field_' . $r['field_id'] . '_visibility'); ?>"
-								   value="<?php echo esc_attr($level['id']); ?>" <?php checked($level['id'], bp_get_the_profile_field_visibility_level()); ?> />
-							<span class="field-visibility-text"><?php echo esc_html($level['label']); ?></span>
+								   id="<?php echo esc_attr( 'see-field_' . $r['field_id'] . '_' . $level['id'] ); ?>"
+								   name="<?php echo esc_attr( 'field_' . $r['field_id'] . '_visibility' ); ?>"
+								   value="<?php echo esc_attr( $level['id'] ); ?>" <?php checked( $level['id'], bp_get_the_profile_field_visibility_level() ); ?> />
+							<span class="field-visibility-text"><?php echo esc_html( $level['label'] ); ?></span>
 						</label>
 
 						<?php echo $r['after_radio']; ?>
