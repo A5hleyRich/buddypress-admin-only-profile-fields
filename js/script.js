@@ -2,23 +2,19 @@
 
 	$( document ).ready( function() {
 
-		var $visibilityInput = $( 'input[name=default-visibility]' );
+		var $visibilityInput = $( 'select[name=default-visibility]' );
 		var $allowedInput    = $( '#allow-custom-visibility-allowed' )
 		var $disabledInput   = $( '#allow-custom-visibility-disabled' );
-		var $enforceBox      = $allowedInput.closest( '.postbox' );
+		var $adminVisibilities = ['hidden', 'internal', 'adminedit'];
 
-		if ( 'hidden' === $visibilityInput.filter( ':checked' ).val() ) {
-			$enforceBox.hide();
+		if ( $.inArray( $visibilityInput.val(), $adminVisibilities ) !== -1 ) {
 			$disabledInput.attr( 'checked', true );
 		}
 
 		$visibilityInput.on( 'change', function() {
-			if ( 'hidden' === $( this ).val() ) {
-				$enforceBox.hide();
+			if ( $.inArray( $( this ).val(), $adminVisibilities ) !== -1 ) {
 				$disabledInput.attr( 'checked', true );
-			}
-			else {
-				$enforceBox.show();
+			} else {
 				$allowedInput.attr( 'checked', true );
 			}
 		} );
