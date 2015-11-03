@@ -138,15 +138,15 @@ class BP_Admin_Only_Profile_Fields {
 	public function custom_visibility_levels( $levels ) {
 		$levels['hidden'] = array(
 			'id'    => 'hidden',
-			'label' => __( 'Admin Only', 'bp_admin_only_profile_fields' )
+			'label' => __( 'Admin', 'bp_admin_only_profile_fields' )
+		);
+		$levels['admin-all'] = array(
+				'id'    => 'admin-all',
+				'label' => __( 'Everyone (Admin Editable)', 'bp_admin_only_profile_fields' )
 		);
 		$levels['admin-owner'] = array(
 			'id'    => 'admin-owner',
-			'label' => __( 'Admin & Profile Owner', 'bp_admin_only_profile_fields' )
-		);
-		$levels['admin-all'] = array(
-			'id'    => 'admin-all',
-			'label' => __( 'Admin & All Users', 'bp_admin_only_profile_fields' )
+			'label' => __( 'Only Me (Admin Editable)', 'bp_admin_only_profile_fields' )
 		);
 
 		return $levels;
