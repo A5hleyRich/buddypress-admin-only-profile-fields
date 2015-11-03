@@ -106,7 +106,7 @@ class BP_Admin_Only_Profile_Fields {
 	 * @since  1.0
 	 */
 	private function load_plugin_textdomain() {
-		load_plugin_textdomain( 'bp_admin_only_profile_fields', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'buddypress-admin-only-profile-fields', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	/**
@@ -138,15 +138,15 @@ class BP_Admin_Only_Profile_Fields {
 	public function custom_visibility_levels( $levels ) {
 		$levels['hidden'] = array(
 			'id'    => 'hidden',
-			'label' => __( 'Admin', 'bp_admin_only_profile_fields' )
+			'label' => __( 'Admin', 'buddypress-admin-only-profile-fields' )
 		);
 		$levels['admin-all'] = array(
 				'id'    => 'admin-all',
-				'label' => __( 'Everyone (Admin Editable)', 'bp_admin_only_profile_fields' )
+				'label' => __( 'Everyone (Admin Editable)', 'buddypress-admin-only-profile-fields' )
 		);
 		$levels['admin-owner'] = array(
 			'id'    => 'admin-owner',
-			'label' => __( 'Only Me (Admin Editable)', 'bp_admin_only_profile_fields' )
+			'label' => __( 'Only Me (Admin Editable)', 'buddypress-admin-only-profile-fields' )
 		);
 
 		return $levels;
