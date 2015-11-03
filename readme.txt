@@ -47,12 +47,11 @@ add_filter( 'bp_admin_only_profile_fields_cap', 'custom_profile_fields_visibilit
 
 = 1.2 =
 
-* Added Admin-Editable Field Visibility Level
-* Added Admin-Internal Field Visibility Level
-* Removed Admin (Hidden) Visibility Levels from Front-End Profile
-* Fix issue with js to support Buddypress change of admin visibility setting from checkboxes to selects
-* Fix issue with js where visibility settings dissappears from Admin when Hidden selected
-* Fix issue breaking standard Buddypress Visibility options
+* New: Added 'Everyone (Admin Editable)' field visibility level
+* New: Added 'Only Me (Admin Editable)' field visibility level
+* Bug fix: Issues with JS due to admin visibility settings change from checkboxes to selects
+* Bug fix: Issue with JS where visibility settings disappear when 'Hidden' selected
+* Bug fix: Issue with breaking standard BuddyPress Visibility options
 
 = 1.1.1 =
 
@@ -71,8 +70,8 @@ add_filter( 'bp_admin_only_profile_fields_cap', 'custom_profile_fields_visibilit
 
 = 1.2 =
 
-* Buddypress Compatibility Fix
-* Addition of Admin-Editable Visibility Field Option
+* New visibility options
+* Bug fixes
 
 = 1.1.1 =
 
