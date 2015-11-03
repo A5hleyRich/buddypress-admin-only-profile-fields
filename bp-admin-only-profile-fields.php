@@ -7,6 +7,8 @@ Author: Ashley Rich
 Contributors: Garrett Hyder
 Author URI: http://ashleyrich.com
 License: GPL2
+Text Domain: buddypress-admin-only-profile-fields
+Domain Path: /languages/
 
 Copyright 2013  Ashley Rich (email : hello@ashleyrich.com)
 
