@@ -60,6 +60,7 @@ class BP_Admin_Only_Profile_Fields {
 
 		// Actions
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'bp_members_admin_xprofile_metabox', array( $this, 'remove_empty_groups_metaboxes' ), 20, 3 );
 
 		// Filters
 		add_filter( 'bp_xprofile_get_visibility_levels', array( $this, 'custom_visibility_levels' ) );
@@ -239,6 +240,34 @@ class BP_Admin_Only_Profile_Fields {
 		}
 
 		return $retval;
+	}
+
+	/**
+	 * Action Workaround to remove empty group metaboxes and avoid error on save.
+	 *
+	 * @since  1.2.1
+	 *
+	 * @link https://github.com/A5hleyRich/buddypress-admin-only-profile-fields/issues/13 Github Issue
+	 *
+	 * @param string $retval
+	 * @param array   $r
+	 * @param array   $args
+	 *
+	 * @return array
+	 */
+	public function remove_empty_groups_metaboxes($user_id, $screen_id, $stats_metabox) {
+		// Get all users xprofile groups
+		$groups = bp_xprofile_get_groups( array(
+			'fetch_fields' => true,
+			'user_id'      => $user_id
+		) );
+
+		foreach( $groups as $group ) {
+			if ( empty( $group->fields ) ) {
+				// Remove empty groups metabox
+				remove_meta_box('bp_xprofile_user_admin_fields_' . sanitize_key( sanitize_title( $group->name ) ), $screen_id, 'normal');
+			}
+		}
 	}
 }
 
